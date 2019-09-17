@@ -26,3 +26,4 @@ class Film(TimeStamped):
 
     # class Meta:
     #     ordering = ['-version',]
+    # https://stackoverflow.com/questions/16560055/django-admin-sorting-list-filter
