@@ -1,1 +1,2 @@
 Django==2.2.5
+-e git+https://github.com/darklow/django-suit.git@v2#egg=django-suit

@@ -23,3 +23,6 @@ class Film(TimeStamped):
 
     def __str__(self):
         return self.primary_title
+
+    # class Meta:
+    #     ordering = ['-version',]
