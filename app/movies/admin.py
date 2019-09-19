@@ -6,6 +6,14 @@ from .models import Film
 class AdminFilm(admin.ModelAdmin):
     # list_filter = ('start_year', )
     search_fields = ['content_search']
-    list_display = ['primary_title', 'start_year', 'cache_average_rating', 'cache_num_votes']
+    list_display = ['primary_title', 'start_year', 'rating', 'votes']
     readonly_fields = ['tconst']
     list_per_page = 20
+
+    def rating(self, obj):
+        return obj.cache_average_rating
+    rating.short_description = 'Rating'
+
+    def votes(self, obj):
+        return obj.cache_num_votes
+    votes.short_description = 'Votes'

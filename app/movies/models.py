@@ -23,6 +23,7 @@ class Film(models.Model):
     class Meta:
         db_table = 'films'
         indexes = [GinIndex(fields=["content_search"])]
+        ordering = ['-cache_num_votes', '-cache_average_rating',]
 
     def __str__(self):
         return self.primary_title

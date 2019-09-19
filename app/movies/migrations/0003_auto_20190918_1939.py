@@ -16,10 +16,8 @@ class Migration(migrations.Migration):
         ALTER TABLE "public"."films" ALTER COLUMN "updated_at" SET DEFAULT NOW();
 
         CREATE TRIGGER content_search_update BEFORE INSERT OR UPDATE
-        ON films FOR EACH ROW EXECUTE FUNCTION
-        
+        ON films FOR EACH ROW EXECUTE PROCEDURE
         tsvector_update_trigger(content_search, 'pg_catalog.english', original_title, original_title);
-
         UPDATE films set ID = ID;
     '''
 

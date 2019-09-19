@@ -3,4 +3,4 @@ python-decouple==3.1
 dj-database-url==0.5.0
 psycopg2==2.8.3
 pandas==0.25.1
--e git+https://github.com/darklow/django-suit.git@v2#egg=django-suit
+-e git+https://github.com/darklow/django-suit.git@v2#egg=suit
