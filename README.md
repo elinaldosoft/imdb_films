@@ -41,3 +41,14 @@ Add Ratings in Films
 ```
     Time average to import 00:18:38
 ```
+
+
+
+```
+UPDATE films
+SET cache_average_rating=subquery.average_rating,
+    cache_num_votes=subquery.num_votes
+FROM (SELECT tconst, average_rating, num_votes
+      FROM ratings) AS subquery
+WHERE films.tconst=subquery.tconst;
+```

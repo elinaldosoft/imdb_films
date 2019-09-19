@@ -4,7 +4,7 @@ services:
     restart: always
     image: postgres:10.1-alpine
     ports:
-      - "5432:5432"
+      - 5432:5432
     volumes:
       - pgdata:/var/lib/postgresql/data/
   web:
@@ -15,6 +15,7 @@ services:
       - 8000
     links:
       - postgres:postgres
+      - elasticsearch:elasticsearch
     env_file: .env
     command: /usr/local/bin/gunicorn config.wsgi:application -w 2 --threads=2 --worker-connections=100 -b :8000
     volumes:
@@ -26,12 +27,22 @@ services:
     restart: always
     build: ./nginx
     ports:
-      - "80:80"
+      - 80:80
     volumes:
       - web-static:/www/static
     links:
       - web:web
+  elasticsearch:
+    restart: always
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.3.2
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - 9200:9200
+    volumes:
+      - es:/usr/share/elasticsearch/data
 volumes:
   pgdata:
   web-static:
   web-app:
+  es:
