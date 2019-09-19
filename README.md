@@ -14,17 +14,23 @@ Build
 Access Docker Container
 - `docker exec -i -t id-container /bin/bash`
 
+List Volumes
+- `docker volume ls`
+
+Remove Volume
+- `docker volume rm volume_name`
+
 Migrate
-- `docker-compose run web python3 manage.py migrate`
+- `make migrate`
 
 Collection Static
-- `docker-compose run web python3 manage.py collectstatic --noinput`
+- `make collectstatic`
 
 Remove Containers
 - `docker rm $(docker ps -q --all)`
 
 ## Import Movies
-- `docker-compose run web python3 manage.py importimdb films`
+- `make import-films`
 
 ## Add Ratings in Films
-- `docker-compose run web python3 manage.py importimdb ratings`
+- `make import-ratings`
