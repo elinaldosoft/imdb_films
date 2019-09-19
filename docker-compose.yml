@@ -1,19 +1,37 @@
-version: '3.7'
-
+version: '3'
 services:
-  database:
+  postgres:
+    restart: always
     image: postgres:10.1-alpine
+    ports:
+      - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - pgdata:/var/lib/postgresql/data/
   web:
-    build: .
-    command: python manage.py migrate && make runserver
+    restart: always
+    build: ./web
+    image: web
+    expose:
+      - 8000
+    links:
+      - postgres:postgres
+    env_file: .env
+    command: /usr/local/bin/gunicorn config.wsgi:application -w 2 --threads=2 --worker-connections=100 -b :8000
     volumes:
-      - .:/usr/src/app
+      - web-app:/usr/src/app
+      - web-static:/usr/src/app/static
     ports:
       - 8000:8000
-    depends_on:
-      - database
-
+  nginx:
+    restart: always
+    build: ./nginx
+    ports:
+      - "80:80"
+    volumes:
+      - web-static:/www/static
+    links:
+      - web:web
 volumes:
-  postgres_data:
+  pgdata:
+  web-static:
+  web-app:

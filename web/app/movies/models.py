@@ -13,7 +13,7 @@ class Film(models.Model):
     end_year = models.CharField(max_length=250, null=True, blank=True)
     runtime_minutes = models.CharField(max_length=250, null=True, blank=True)
     genres = models.CharField(max_length=250, null=True, blank=True)
-    cache_average_rating = models.IntegerField(default=0)
+    cache_average_rating = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     cache_num_votes = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
