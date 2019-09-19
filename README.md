@@ -7,7 +7,7 @@
 ### Install Packges
 `pip3 install -r requirements/dev.txt`
 
-## Docker Configurations
+## Docker Useful
 Build
 - `docker-compose up --build`
 
@@ -20,17 +20,24 @@ List Volumes
 Remove Volume
 - `docker volume rm volume_name`
 
-Migrate
-- `make migrate`
-
-Collection Static
-- `make collectstatic`
-
 Remove Containers
 - `docker rm $(docker ps -q --all)`
 
-## Import Movies
-- `make import-films`
+## Configuration 
+Migrate
+1 - `make migrate`
 
-## Add Ratings in Films
+Collection Static
+2 - `make collectstatic`
+
+Import Movies
+- `make import-films` 
+```
+    Time average to import 00:06:43
+```
+
+Add Ratings in Films
 - `make import-ratings`
+```
+    Time average to import 00:18:38
+```
