@@ -5,7 +5,7 @@ from .models import Film
 @admin.register(Film)
 class AdminFilm(admin.ModelAdmin):
     # list_filter = ('start_year', )
-    search_fields = ['content_search']
+    search_fields = ['primary_title']
     list_display = ['primary_title', 'start_year', 'rating', 'votes']
     readonly_fields = ['tconst']
     list_per_page = 20

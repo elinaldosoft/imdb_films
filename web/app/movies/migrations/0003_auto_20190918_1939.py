@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
     '''
 
     reverse_migration = '''
-        DROP TRIGGER content_search ON films;
+        DROP TRIGGER content_search_update ON films;
     '''
 
     operations = [

@@ -23,16 +23,22 @@ class Command(BaseCommand):
     def import_ratings(self):
         url = 'https://datasets.imdbws.com/title.ratings.tsv.gz'
         chunks = pd.read_table(url, compression='gzip', sep='\t', encoding='utf-8', chunksize=50000, iterator=True, na_filter=False)
-        sql = "UPDATE public.films SET cache_average_rating = %s, cache_num_votes = %s WHERE tconst = %s"
         for df in chunks:
-            data = []
+            stream = StringIO()
+            writer = csv.writer(stream, delimiter='\t')
             for item in df.values:
-                item = list(map(lambda x: str(x), item))
-                data.append([item[1], item[2], item[0]])
+                item = list(item)
+                item[0] = int(item[0].replace('tt', ''))
+                writer.writerow(item)
+            stream.seek(0)
             with closing(connection.cursor()) as cursor:
-                cursor.executemany(sql, data)
-                data = []
                 self.stdout.write(self.style.SUCCESS('Commit 50k'))
+                cursor.copy_from(
+                    file=stream,
+                    table='ratings',
+                    sep='\t',
+                    columns=("tconst", "average_rating", "num_votes")
+                )
 
     def import_films(self):
         url = 'https://datasets.imdbws.com/title.basics.tsv.gz'
@@ -41,10 +47,11 @@ class Command(BaseCommand):
             stream = StringIO()
             writer = csv.writer(stream, delimiter='\t')
             for item in df.values:
+                item = list(item)
+                item[0] = int(item[0].replace('tt', ''))
                 if "\t" in str(item[2]):
-                    item = list(item)
                     item = item[0:2] + item[2].split('\t') + item[3:8] #fix bad format in file
-                writer.writerow(list(map(lambda x: str(x), item)))
+                writer.writerow(item)
             stream.seek(0)
             with closing(connection.cursor()) as cursor:
                 self.stdout.write(self.style.SUCCESS('Commit 50k'))
