@@ -10,6 +10,19 @@ To you run in production, need the docker and docker-compose installed
 - `make import-ratings`
 - `make cache-ratings`
 
+```
+listen in http://localhost:5000
+user: admin | passwd: admin
+
+Access postgres:
+$psql -h 127.0.0.1 -p 54320 -U postgres
+
+Tips:
+Do you can add password in Postgres
+environment:
+    POSTGRES_PASSWORD: example
+```
+
 # How to run the project in Development mode
 `virtualenv venv -p $(which python3.6)`
 ### Enable Environment
@@ -60,3 +73,4 @@ To you run in production, need the docker and docker-compose installed
 - `docker volume rm volume_name` (Remove Volume)
 - `docker rm $(docker ps -q --all)` (Remove containers)
 - `docker stop $(docker ps -a -q)` (Stop all containers)
+- `docker volume rm $(docker volume ls -q)` (Remove all volumes)

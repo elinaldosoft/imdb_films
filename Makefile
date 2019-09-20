@@ -15,6 +15,3 @@ stop:
 clean:
 	docker stop $(docker ps -a -q)
 	docker rm -v $(sudo docker ps -a -q)
-
-
-# https://hrsoft.herokuapp.com/interviews/1320a07c-7faa-4f41-a24a-51441e8a8a73

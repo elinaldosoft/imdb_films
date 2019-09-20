@@ -92,8 +92,8 @@ class Command(BaseCommand):
         elif 'ratings' == options['import']:
             self.stdout.write(self.style.NOTICE('Rating import starting'))
             self.import_ratings()
-            self.stdout.write(self.style.NOTICE('Rating import starting'))
+            self.stdout.write(self.style.NOTICE('Rating import finished'))
         elif 'ratings_cache' == options['import']:
             self.stdout.write(self.style.NOTICE('Running update cache rating'))
             self.ratings_cache()
-            self.stdout.write(self.style.NOTICE('end update cache rating'))
+            self.stdout.write(self.style.NOTICE('Update cache rating finished'))
