@@ -25,16 +25,19 @@ Remove Containers
 
 ## Configuration 
 Migrate
-1 - `make migrate`
+- `make migrate`
 
 Collection Static
-2 - `make collectstatic`
+- `make collectstatic`
 
 Import Movies
 - `make import-films`
 
 Add Ratings in Films
 - `make import-ratings`
+
+Update cache rating
+- `make cache-ratings`
 
 - Update rating cache
 ```
