@@ -31,19 +31,12 @@ Collection Static
 2 - `make collectstatic`
 
 Import Movies
-- `make import-films` 
-```
-    Time average to import 00:06:43
-```
+- `make import-films`
 
 Add Ratings in Films
 - `make import-ratings`
-```
-    Time average to import 00:18:38
-```
 
-
-
+- Update rating cache
 ```
 UPDATE films
 SET cache_average_rating=subquery.average_rating,
