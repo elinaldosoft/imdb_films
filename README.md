@@ -22,6 +22,8 @@ Do you can add password in Postgres
 environment:
     POSTGRES_PASSWORD: example
 ```
+### Obs:
+`This process can to be slow, because are 6.5M of titles`
 
 # How to run the project in Development mode
 `virtualenv venv -p $(which python3.6)`
@@ -62,9 +64,6 @@ environment:
         FROM ratings) AS subquery
     WHERE films.tconst=subquery.tconst;
     ```
-
-### Obs:
-`This process can to be slow, because are 6M of titles`
 
 ### Docker Useful
 - `docker-compose up --build` (Build)
