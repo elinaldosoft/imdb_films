@@ -12,8 +12,10 @@ class AdminFilm(admin.ModelAdmin):
 
     def rating(self, obj):
         return obj.cache_average_rating
+
     rating.short_description = 'Rating'
 
     def votes(self, obj):
         return obj.cache_num_votes
+
     votes.short_description = 'Votes'

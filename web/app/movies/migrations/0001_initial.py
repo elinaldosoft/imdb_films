@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.db import migrations
 from django.contrib.auth.models import User
 
+
 def load_first_user(apps, schema_editor):
     User(
         id=1,
@@ -12,14 +13,12 @@ def load_first_user(apps, schema_editor):
         email='admin@gmail.com',
         is_staff=True,
         is_active=True,
-        date_joined=timezone.now()
+        date_joined=timezone.now(),
     ).save()
+
 
 class Migration(migrations.Migration):
 
     dependencies = []
 
-    operations = [
-        migrations.RunPython(load_first_user),
-    ]
-
+    operations = [migrations.RunPython(load_first_user)]

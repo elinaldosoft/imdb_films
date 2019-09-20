@@ -6,6 +6,8 @@ import-films:
 	docker-compose run web python3 manage.py importimdb films
 import-ratings:
 	docker-compose run web python3 manage.py importimdb ratings
+cache-ratings:
+	docker-compose run web python3 manage.py importimdb ratings_cache
 run:
 	docker-compose up -d --build
 stop:
